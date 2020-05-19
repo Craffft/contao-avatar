@@ -48,19 +48,6 @@ class FormAvatar extends \AvatarWidgetBase
     }
 
     /**
-     * @inheritDoc
-     */
-    public function __set($strKey, $varValue)
-    {
-        // Do not allow to override widget ID/name by Contao 4.6+ core modules (see #19)
-        if ($strKey === 'id' && preg_match('/^avatar_[\d]+$/', $varValue)) {
-            return;
-        }
-
-        parent::__set($strKey, $varValue);
-    }
-
-    /**
      * Store the file information in the session
      * @param mixed
      * @return mixed
@@ -93,7 +80,7 @@ class FormAvatar extends \AvatarWidgetBase
                 'error'    => 0,
                 'size'     => $objFile->size,
                 'uploaded' => true,
-                'uuid'     => ($objModel !== null) ? \String::binToUuid($objFile->uuid) : ''
+                'uuid'     => ($objModel !== null) ? \StringUtil::binToUuid($objFile->uuid) : ''
             );
         }
 
